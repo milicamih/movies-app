@@ -1,0 +1,29 @@
+<mat-drawer-container class="container" autosize>
+  <mat-drawer #drawer class="sidenav" mode="side">
+    <p>Filter movies by category</p>
+    <ul>
+      <li [class.active]="activeCategory === category.id"
+          *ngFor="let category of categories" (click)="filterMovies(category.id)">{{category.name}}</li>
+    </ul>
+  </mat-drawer>
+
+  <div class="sidenav-content">
+    <nav>
+      <button mat-button color="accent" (click)="drawer.toggle()">
+         CATEGORIES
+      </button>
+      <a *ngIf="!currentUser" class="login" [routerLink]="'/login'">Login</a>
+    </nav>
+
+    <div class="movies-container">
+    <ng-container *ngFor="let movie of movies | filter:activeCategory">
+      <div class="movie" [routerLink]="['/movie-details/', movie?.id]">
+        <h3>{{movie.name}}</h3>
+        <p>{{movie.description}}</p>
+      </div>
+    </ng-container>
+    </div>
+  </div>
+
+</mat-drawer-container>
+

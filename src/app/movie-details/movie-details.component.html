@@ -1,0 +1,36 @@
+<div class="container" *ngIf="movie">
+<nav>
+   <a class="back" [routerLink]="'/movies'">Previous page</a>
+   <a *ngIf="!currentUser" class="login" [routerLink]="'/login'">Login</a>
+</nav>
+
+  <div class="movie-details-container">
+  <div class="movie-details">
+    <h2>{{movie.name}}</h2>
+    <img [src]="movie.imageUrl" alt="">
+    <p class="movie-description">{{movie.description}}</p>
+    <h6>{{movie.imdbId}}</h6>
+  </div>
+
+  <div class="comments-wrapper">
+    <h2>Comments:</h2>
+    <ng-container *ngIf="movie.comments?.length; else noComments">
+      <div class="comments" *ngFor="let co of movie.comments">
+        <p class="comment-date"><small>{{co.createdAt | date: 'dd:hh:ss'}}</small></p>
+        <p class="comment-text">{{co.text}}</p>
+      </div>
+    </ng-container>
+    <ng-template #noComments>
+      <p class="no-comment">This movie has no comments, be the first to add comment</p>
+    </ng-template>
+  </div>
+
+    <div class="comment-form">
+      <mat-form-field>
+        <mat-label>Comment</mat-label>
+         <input matInput name="term" [(ngModel)]="comment" type="text" placeholder="Add comment..." required minlength="4"/>
+      </mat-form-field>
+      <button mat-raised-button color="primary" (click)="addComment()">Add comment</button>
+    </div>
+  </div>
+</div>
