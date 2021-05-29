@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import {AuthService} from "../auth.service";
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {AuthService} from '../auth.service';
 
 export interface User {
   firstName: string;
@@ -29,10 +29,8 @@ export class SingInComponent implements OnInit {
     });
   }
 
-  get f() { return this.registerForm.controls; }
-
-  saveUser() {
-    if(this.registerForm.valid) {
+  saveUser(): void {
+    if (this.registerForm.valid) {
       this.ls.singIn(this.registerForm.value);
     }
   }

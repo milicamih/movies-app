@@ -1,24 +1,24 @@
 .container {
   max-width: 1200px;
   margin: 0 auto 20px;
-
+  border: 2px solid #114354;
 
   nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 12px 40px;
-    background-color: #5c389c;
+    padding: 18px 40px;
+    background-color: #114354;
 
     .back {
       display: flex;
       align-items: center;
-      color: #ffd740;
+      color: #bfddde;
       cursor: pointer;
     }
 
     a {
-      color: #ffd740;
+      color: #bfddde;
     }
   }
 
@@ -30,11 +30,12 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      border: 1px solid #5c389c;
+      border: 1px solid #114354;
       margin-top: 20px;
+      padding: 12px;
 
       h2 {
-        color: #5c389c;
+        color: #114354;
       }
 
       img {
@@ -48,17 +49,26 @@
         font-size: 14px;
         text-align: justify;
       }
+
+      h4 {
+        cursor: pointer;
+        color: #114354;
+
+        &:hover {
+          color: #bfddde;
+        }
+      }
     }
 
     .comments-wrapper {
 
       h2 {
         margin: 20px 0;
-        color: #5c389c;
+        color: #114354;
       }
 
       .comment-text {
-        border: 1px solid #5c389c;
+        border: 1px solid #114354;
         width: auto;
         margin: 0;
         padding: 8px;
@@ -69,7 +79,7 @@
         text-align: end;
         margin: 0;
         font-size: 10px;
-        color: #5c389c;
+        color: #114354;
       }
     }
 

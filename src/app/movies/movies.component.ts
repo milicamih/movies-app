@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {MovieService} from "../shared/services/movie.service";
-import {Movie} from "../shared/models/movie";
-import {Category} from "../shared/models/category";
-import {AuthService} from "../auth/auth.service";
-import {User} from "../auth/sing-in/sing-in.component";
+import { MovieService } from '../shared/services/movie.service';
+import { Movie } from '../shared/models/movie';
+import { Category } from '../shared/models/category';
+import { AuthService } from '../auth/auth.service';
+import { User } from '../auth/sing-in/sing-in.component';
 
 @Component({
   selector: 'app-movies',

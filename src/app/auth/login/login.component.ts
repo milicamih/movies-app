@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {AuthService} from "../auth.service";
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {AuthService} from '../auth.service';
 
 export interface Login {
   email: string;
@@ -25,10 +25,8 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  get f() { return this.loginForm.controls; }
-
-  saveData() {
-    if(this.loginForm.valid) {
+  saveData(): void {
+    if (this.loginForm.valid) {
       this.ls.login(this.loginForm.value);
     }
   }

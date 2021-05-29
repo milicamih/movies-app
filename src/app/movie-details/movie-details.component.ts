@@ -1,12 +1,14 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from "@angular/router";
-import {MovieService} from "../shared/services/movie.service";
-import {mergeMap, tap} from "rxjs/operators";
-import {Movie} from "../shared/models/movie";
-import {Comment} from "../shared/models/comment";
-import {AuthService} from "../auth/auth.service";
-import {SnackbarService} from "../shared/services/snackbar.service";
-import {User} from "../auth/sing-in/sing-in.component";
+import {ActivatedRoute, Router} from '@angular/router';
+import {MovieService} from '../shared/services/movie.service';
+import {filter, map, mergeMap, tap} from 'rxjs/operators';
+import {Movie} from '../shared/models/movie';
+import {Comment} from '../shared/models/comment';
+import {AuthService} from '../auth/auth.service';
+import {SnackbarService} from '../shared/services/snackbar.service';
+import {User} from '../auth/sing-in/sing-in.component';
+import { IMDBService } from '../shared/services/imdb.service';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-movie-details',
@@ -22,7 +24,9 @@ export class MovieDetailsComponent implements OnInit {
               private movieService: MovieService,
               private router: Router,
               private authService: AuthService,
-              public snackbar: SnackbarService) {
+              public snackbar: SnackbarService,
+              private imdbService: IMDBService,
+              ) {
   }
 
   ngOnInit(): void {
@@ -31,33 +35,40 @@ export class MovieDetailsComponent implements OnInit {
     this.currentUser = this.authService.getCurrentUser()
   }
 
-  addComment() {
+  addComment(): void {
     if (!this.currentUser) {
       this.snackbar.openSnackBar('To add a comment you must be logged');
-      this.router.navigate(['./login'])
+      this.router.navigate(['./login']);
     } else {
       this.movie.comments.push({
         id: new Date().toString(),
         movieId: this.movie.id,
         createdAt: new Date().toString(),
         text: this.comment,
-      })
+      });
       this.comment = '';
     }
   }
 
-  private getMovieDetails(id: string) {
+  private getMovieDetails(id: string): void {
     this.movieService.getMovies().pipe(
       tap((movie: Movie[]) =>
-        this.movie = movie.find((movie: Movie) => movie.id === id)),
+        this.movie = movie.find((m: Movie) => m.id === id)),
       mergeMap(() => this.movieService.getComments())
     ).subscribe((comments: Comment[]) => {
       this.movie.comments = [];
       comments.forEach(comment => {
         if (comment.movieId === id) {
-          this.movie.comments.push(comment)
+          this.movie.comments.push(comment);
         }
-      })
-    })
+      });
+    });
+  }
+
+  getMovieTrailer(movieId: string): void {
+    this.imdbService.getMovieTrailer(movieId).subscribe(res => {
+      const videoId = res.resource.videos[0].id.substring(9);
+      window.open(`https://www.imdb.com/video/${videoId}?playlistId=${movieId}&ref_=tt_ov_viz`,'_blank');
+    });
   }
 }

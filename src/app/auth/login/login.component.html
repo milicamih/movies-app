@@ -1,35 +1,18 @@
 <div class="container">
-
-  <h2>LOGIN</h2>
-
-  <div class="wrapper">
-    <form [formGroup]="loginForm">
-
-      <mat-form-field class="example-full-width">
-        <mat-label>Email</mat-label>
-        <input matInput formControlName="email" placeholder="Enter email" type="email">
-        <mat-error *ngIf="f.email.hasError('required')">
-          Last name is <strong>required</strong>
-        </mat-error>
-        <mat-error *ngIf="f.email.hasError('email')">
-          Enter valid email address
-        </mat-error>
-      </mat-form-field>
-
-      <mat-form-field class="example-full-width">
-        <mat-label>Password</mat-label>
-        <input matInput formControlName="password" placeholder="Enter password" type="password">
-        <mat-error *ngIf="f.password.hasError('required')">
-          Password is <strong>required</strong>
-        </mat-error>
-        <mat-error *ngIf="f.password.hasError('minlength')">
-          Last name must be at least 6 characters long
-        </mat-error>
-      </mat-form-field>
-    </form>
-
-    <button mat-raised-button color="primary" [disabled]="!loginForm.valid" (click)="saveData()">Sing in</button>
-    <a class="login" [routerLink]="'/sing-in'">Don't have account</a>
-  </div>
+    <h2>LOGIN</h2>
+    <div class="wrapper">
+        <form [formGroup]="loginForm">
+            <mat-form-field class="example-full-width">
+                <mat-label>Email</mat-label>
+                <input matInput formControlName="email" placeholder="Enter email" type="email">
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+                <mat-label>Password</mat-label>
+                <input matInput formControlName="password" placeholder="Enter password" type="password">
+            </mat-form-field>
+        </form>
+        <button mat-raised-button color="primary" [disabled]="!loginForm.valid" (click)="saveData()">Sing in</button>
+        <a class="login" [routerLink]="'/sing-in'">Don't have account</a>
+    </div>
 </div>
 
